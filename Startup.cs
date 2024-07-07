@@ -32,13 +32,12 @@ namespace TodoApi
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Todo API",
-                    Description = "A simple ASP.NET Core Web API for Sales Reporting",
+                    Title = "SalesReportAPI",
+                    Description = "API that allows you to get monthly reports",
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact
                     {
-                        Name = "Your Name",
-                        Email = "yourname@example.com",
-                        Url = new Uri("https://example.com"),
+                        Name = "Югослав Добровольский",
+                        Email = "heavenmaido@gmail.com",
                     }
                 });
             });
