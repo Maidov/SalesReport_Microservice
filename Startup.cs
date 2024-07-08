@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Identity;
 
 namespace ReportApi
 {
@@ -48,6 +49,12 @@ namespace ReportApi
 
             services.AddDbContext<SalesContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>()
+                .AddDefaultTokenProviders();
             
             services.AddSingleton<KafkaProducerService>();
             services.AddHostedService<KafkaConsumerService>();
