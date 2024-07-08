@@ -1,9 +1,8 @@
-////dotnet ef database update --context SalesContext
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using ReportApi.Models; // Убедитесь, что используется правильное пространство имён для SalesContext
+using ReportApi.Models;
 
 namespace ReportApi
 {
@@ -13,15 +12,14 @@ namespace ReportApi
         {
             var host = CreateHostBuilder(args).Build();
 
-            // Добавляем код для применения миграций
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
                 {
                     var context = services.GetRequiredService<SalesContext>();
-                    context.Database.EnsureCreated(); // Убедитесь, что база данных создана, если её еще нет
-                    // Другие операции, связанные с миграциями, могут быть выполнены здесь
+                    context.Database.EnsureCreated(); 
+
                 }
                 catch (System.Exception ex)
                 {

@@ -1,5 +1,3 @@
-
-// ReportItem.cs (модель для элементов отчета)
 namespace ReportApi.Models
 {
     public class ReportItem
@@ -11,7 +9,6 @@ namespace ReportApi.Models
     }
 }
 
-// MonthlyReport.cs (модель для самого отчета)
 namespace ReportApi.Models
 {
     public class MonthlyReport

@@ -10,7 +10,6 @@ namespace ReportApi.Models
         {
         }
 
-        // DbSet и другие настройки вашего контекста
         public DbSet<SalesItem> SalesItems { get; set; }
     }
 }
