@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 public class KafkaConsumerService : BackgroundService
 {
     private readonly IConsumer<Null, string> _consumer;
-    private readonly string _topic;
+    private readonly string? _topic;
 
     public KafkaConsumerService(IConfiguration configuration)
     {
@@ -35,13 +35,12 @@ public class KafkaConsumerService : BackgroundService
                     var consumeResult = _consumer.Consume(stoppingToken);
                     if (consumeResult != null)
                     {
-                        // Обработка сообщения
+                        // Console.WriteLine("Test string for debugging KafkaConsumer");
                         ProcessMessage(consumeResult.Message.Value);
                     }
                 }
                 catch (OperationCanceledException)
                 {
-                    // Закрытие консумера при остановке сервиса
                     _consumer.Close();
                 }
             }

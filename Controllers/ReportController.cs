@@ -24,7 +24,6 @@ namespace ReportApi.Controllers
         {
             try
             {
-                // Проверка на корректность месяца (1-12)
                 if (month < 1 || month > 12)
                 {
                     return BadRequest("Invalid month. Please provide a valid month number (1-12).");
@@ -40,7 +39,6 @@ namespace ReportApi.Controllers
                                  si.Date.Month == month)
                     .ToListAsync();
 
-                // Группируем по наименованию товара и вычисляем средние показатели
                 var groupedItems = salesItems.GroupBy(si => si.Name)
                     .Select(group => new ReportItem
                     {
@@ -51,7 +49,6 @@ namespace ReportApi.Controllers
                     })
                     .ToList();
 
-                // Формируем объект с результатами отчета
                 var report = new MonthlyReport
                 {
                     Category = category,

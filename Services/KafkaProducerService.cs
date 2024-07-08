@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 public class KafkaProducerService
 {
     private readonly IProducer<Null, string> _producer;
-    private readonly string _topic;
+    private readonly string? _topic;
 
     public KafkaProducerService(IConfiguration configuration)
     {
