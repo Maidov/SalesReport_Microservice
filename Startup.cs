@@ -7,6 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using ReportApi.Models;
+using Microsoft.OpenApi.Models;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Identity;
 
 namespace ReportApi
 {
@@ -21,8 +27,34 @@ namespace ReportApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Key"]);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             services.AddDbContext<SalesContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>()
+                .AddDefaultTokenProviders();
             
             services.AddSingleton<KafkaProducerService>();
             services.AddHostedService<KafkaConsumerService>();
@@ -40,6 +72,14 @@ namespace ReportApi
                         Email = "heavenmaido@gmail.com",
                     }
                 });
+                    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
             services.AddControllers();
@@ -58,8 +98,12 @@ namespace ReportApi
                     c.RoutePrefix = string.Empty; 
                 });
             }
+            app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
