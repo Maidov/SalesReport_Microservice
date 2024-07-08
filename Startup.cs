@@ -57,7 +57,7 @@ namespace ReportApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Todo API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Report API V1");
                     c.RoutePrefix = string.Empty; // Префикс маршрута Swagger UI (пустой для корня сервера)
                 });
             }

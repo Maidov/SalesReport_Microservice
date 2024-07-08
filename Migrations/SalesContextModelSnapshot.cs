@@ -22,7 +22,7 @@ namespace ReportApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TodoApi.Models.SalesItem", b =>
+            modelBuilder.Entity("ReportApi.Models.SalesItem", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
