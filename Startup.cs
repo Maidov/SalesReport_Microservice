@@ -25,6 +25,9 @@ namespace ReportApi
             // Регистрация контекста базы данных для PostgreSQL
             services.AddDbContext<SalesContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddSingleton<KafkaProducerService>();
+            services.AddHostedService<KafkaConsumerService>();
 
             // Добавление сервиса Swagger
             services.AddSwaggerGen(c =>
