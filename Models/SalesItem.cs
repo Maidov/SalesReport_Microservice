@@ -1,4 +1,4 @@
-namespace TodoApi.Models
+namespace ReportApi.Models
 {
     public class SalesItem
     {

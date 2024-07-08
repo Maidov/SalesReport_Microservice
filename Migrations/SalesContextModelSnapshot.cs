@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using TodoApi.Models;
+using ReportApi.Models;
 
 #nullable disable
 
-namespace TodoApi.Migrations
+namespace ReportApi.Migrations
 {
     [DbContext(typeof(SalesContext))]
     partial class SalesContextModelSnapshot : ModelSnapshot

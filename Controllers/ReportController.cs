@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TodoApi.Models;
+using ReportApi.Models;
 
-namespace TodoApi.Controllers
+namespace ReportApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

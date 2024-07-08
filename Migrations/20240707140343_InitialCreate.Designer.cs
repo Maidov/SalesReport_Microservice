@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using TodoApi.Models;
+using ReportApi.Models;
 
 #nullable disable
 
-namespace TodoApi.Migrations
+namespace ReportApi.Migrations
 {
     [DbContext(typeof(SalesContext))]
     [Migration("20240707140343_InitialCreate")]

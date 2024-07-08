@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using TodoApi.Models; // Убедитесь, что используется правильное пространство имён для SalesContext
+using ReportApi.Models; // Убедитесь, что используется правильное пространство имён для SalesContext
 
-namespace TodoApi
+namespace ReportApi
 {
     public class Program
     {

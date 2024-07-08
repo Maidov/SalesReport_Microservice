@@ -6,9 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
-using TodoApi.Models;
+using ReportApi.Models;
 
-namespace TodoApi
+namespace ReportApi
 {
     public class Startup
     {

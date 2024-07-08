@@ -1,6 +1,6 @@
 
 // ReportItem.cs (модель для элементов отчета)
-namespace TodoApi.Models
+namespace ReportApi.Models
 {
     public class ReportItem
     {
@@ -12,7 +12,7 @@ namespace TodoApi.Models
 }
 
 // MonthlyReport.cs (модель для самого отчета)
-namespace TodoApi.Models
+namespace ReportApi.Models
 {
     public class MonthlyReport
     {
