@@ -2,6 +2,8 @@
 
 API для получения ежемесячных отчетов о продажах
 
+![image](https://github.com/Maidov/SalesReport_Microservice/assets/115298811/36c78b47-9c26-4590-8af4-a606489824ef)
+
 ## Описание
 
 Sales Report API предоставляет RESTful интерфейс для получения ежемесячных отчетов о продажах. API позволяет пользователям получать данные о продажах по заданным параметрам.
@@ -162,7 +164,9 @@ API поддерживает аутентификацию через JSON Web To
   API совместимо с любыми клиентскими приложениями, поддерживающими стандартные RESTful API.
 
 ## Контакты
+   ![1To-sCvVSFw](https://github.com/Maidov/SalesReport_Microservice/assets/115298811/57f5594c-84fe-4f0d-a476-de57472636e1)
 
   Email: heavenmaido@gmail.com
   
   GitHub: https://github.com/Maidov
+
