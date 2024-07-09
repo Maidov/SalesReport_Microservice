@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=psql;Port=5432;Database=SalesPsqlDB;Username=postgres;Password=R3Qw3rty123
+      - Kafka__BootstrapServers=kafka:9092
+    depends_on:
+      - psql
+      - kafka-setup
+    entrypoint: ["dotnet", "ReportApi.dll"]
+    networks:
+      - app-network
+
+  psql:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: SalesPsqlDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: R3Qw3rty123
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+    networks:
+      - app-network
+
+  kafka-setup:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - kafka
+    entrypoint: ["/bin/sh", "-c", "cub kafka-ready -b kafka:9092 1 20 && kafka-topics.sh --create --topic sales-reports --bootstrap-server kafka:9092 --replication-factor 1 --partitions 1"]
+    networks:
+      - app-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
